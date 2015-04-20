@@ -3,20 +3,10 @@
 namespace app\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
 
 
-/**
- * This is the model class for table "{{%user}}".
- *
- * @property integer $id
- * @property string $username
- * @property string $Firstname
- * @property string $Lastname
- * @property string $auth_key
- * @property string $password_hash
- * @property integer $status
- */
 class SignUp extends \yii\db\ActiveRecord //implements IdentityInterface
 {
     /**
@@ -24,7 +14,7 @@ class SignUp extends \yii\db\ActiveRecord //implements IdentityInterface
      */
     public static function tableName()
     {
-        return '{{%user2}}';
+        return '{{%user3}}';
     }
 
     /**
@@ -37,7 +27,14 @@ class SignUp extends \yii\db\ActiveRecord //implements IdentityInterface
             [['username'], 'unique'],
             [['status'], 'integer'],
             [['username', 'Firstname', 'Lastname', 'password_hash'], 'string', 'max' => 255],
-            [['auth_key'], 'string', 'max' => 32]
+            [['auth_key'], 'string', 'max' => 32],
+            ['email', 'required'],
+            ['email', 'email'],
+            ['email', 'unique'],
+            [['birthdate'], 'safe'],
+            [['password_hash'], 'string', 'min' => 6],
+
+            [['username', 'password_hash', 'password_reset_token', 'Firstname', 'Lastname', 'email'], 'string', 'max' => 255],
         ];
     }
 
@@ -48,19 +45,29 @@ class SignUp extends \yii\db\ActiveRecord //implements IdentityInterface
     {
         return [
             'id' => 'ID',
+            'created_at' => 'created',
+            'updated_at' => 'updated_at',
             'username' => 'Username',
             'Firstname' => 'Firstname',
             'Lastname' => 'Lastname',
             'auth_key' => 'Auth Key',
             'password_hash' => 'Password',
             'status' => 'Status',
+            'email' => 'email',
+            'birthdate' => 'Birthdate'
+        ];
+    }
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className(),
         ];
     }
     public function beforeSave($insert)
     {
         if(parent::beforeSave($insert))
         {
-            if($this->isNewRecord)
+           
             {
 
                 $this->auth_key = Yii::$app->security->generateRandomString();

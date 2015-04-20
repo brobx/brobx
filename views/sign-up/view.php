@@ -6,8 +6,8 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\SignUp */
 
-$this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Sign Ups', 'url' => ['index']];
+$this->title = $model->username/*id*/;
+//$this->params['breadcrumbs'][] = ['label' => 'Sign Ups', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="sign-up-view">
@@ -16,25 +16,21 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
+
     </p>
 
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
+            //'id',
             'username',
             'Firstname',
             'Lastname',
             //'auth_key',
-            'password_hash',
+            //'password_hash',
             //'status',
+            'email:email',
+            'birthdate',
         ],
     ]) ?>
 

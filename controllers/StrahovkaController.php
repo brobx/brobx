@@ -3,16 +3,16 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\SignUp;
+use app\models\Strahovka;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * SignUpController implements the CRUD actions for SignUp model.
+ * StrahovkaController implements the CRUD actions for Strahovka model.
  */
-class SignUpController extends Controller
+class StrahovkaController extends Controller
 {
     public function behaviors()
     {
@@ -25,23 +25,15 @@ class SignUpController extends Controller
             ],
         ];
     }
-    public function actions()
-    {
-        return [
-              'captcha' => [
-                'class' => 'yii\captcha\CaptchaAction',
-                'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
-            ],
-        ];
-    }
+
     /**
-     * Lists all SignUp models.
+     * Lists all Strahovka models.
      * @return mixed
      */
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => SignUp::find(),
+            'query' => Strahovka::find(),
         ]);
 
         return $this->render('index', [
@@ -50,7 +42,7 @@ class SignUpController extends Controller
     }
 
     /**
-     * Displays a single SignUp model.
+     * Displays a single Strahovka model.
      * @param integer $id
      * @return mixed
      */
@@ -62,13 +54,13 @@ class SignUpController extends Controller
     }
 
     /**
-     * Creates a new SignUp model.
+     * Creates a new Strahovka model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new SignUp();
+        $model = new Strahovka();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -80,7 +72,7 @@ class SignUpController extends Controller
     }
 
     /**
-     * Updates an existing SignUp model.
+     * Updates an existing Strahovka model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -99,7 +91,7 @@ class SignUpController extends Controller
     }
 
     /**
-     * Deletes an existing SignUp model.
+     * Deletes an existing Strahovka model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -112,19 +104,18 @@ class SignUpController extends Controller
     }
 
     /**
-     * Finds the SignUp model based on its primary key value.
+     * Finds the Strahovka model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return SignUp the loaded model
+     * @return Strahovka the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = SignUp::findOne($id)) !== null) {
+        if (($model = Strahovka::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
 }
-

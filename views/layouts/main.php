@@ -4,7 +4,7 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
-
+use kartik\widgets\Alert;
 /* @var $this \yii\web\View */
 /* @var $content string */
 
@@ -36,9 +36,10 @@ AppAsset::register($this);
                 'options' => ['class' => 'navbar-nav navbar-right'],
                 'items' => [
                     ['label' => 'Home', 'url' => ['/site/index']],
-                    ['label' => 'About', 'url' => ['/site/about']],
-                    ['label' => 'Contact', 'url' => ['/site/contact']],
-                    ['label' => 'Sign Up', 'url' => ['/sign-up']],
+                    ['label' => 'strahovka', 'url' => ['/strahovka']],
+                    //['label' => 'About', 'url' => ['/site/about']],
+                    //['label' => 'Contact', 'url' => ['/site/contact']],
+                    //['label' => 'Sign Up', 'url' => ['/sign-up/create']],
                     Yii::$app->user->isGuest ?
                         ['label' => 'Login', 'url' => ['/site/login']] :
                         ['label' => 'Logout (' . Yii::$app->user->identity->username . ')',

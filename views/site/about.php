@@ -1,16 +1,33 @@
 <?php
+
 use yii\helpers\Html;
+use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-$this->title = 'About';
-$this->params['breadcrumbs'][] = $this->title;
+/* @var $model app\models\SignUp */
+/* @var $form yii\widgets\ActiveForm */
 ?>
-<div class="site-about">
-    <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        This is the About page. You may modify the following file to customize its content:
-    </p>
+<div class="sign-up-form">
 
-    <code><?= __FILE__ ?></code>
+    <?php $form = ActiveForm::begin(); ?>
+
+    <?= $form->field($model, 'username')->textInput(['maxlength' => 255]) ?>
+
+    <?= $form->field($model, 'Firstname')->textInput(['maxlength' => 255]) ?>
+
+    <?= $form->field($model, 'Lastname')->textInput(['maxlength' => 255]) ?>
+
+    <?= $form->field($model, 'email')->textInput(['maxlength' => 255]) ?>
+
+    <?= $form->field($model, 'password_hash')->passwordInput(['maxlength' => 255]) ?>
+
+    <?= $form->field($model, 'birthdate')->textInput() ?>
+
+    <div class="form-group">
+        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+    </div>
+
+    <?php ActiveForm::end(); ?>
+
 </div>
