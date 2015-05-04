@@ -3,16 +3,16 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Strahovka;
+use app\models\Price;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * StrahovkaController implements the CRUD actions for Strahovka model.
+ * PriceController implements the CRUD actions for Price model.
  */
-class StrahovkaController extends Controller
+class PriceController extends Controller
 {
     public function behaviors()
     {
@@ -27,13 +27,13 @@ class StrahovkaController extends Controller
     }
 
     /**
-     * Lists all Strahovka models.
+     * Lists all Price models.
      * @return mixed
      */
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Strahovka::find(),
+            'query' => Price::find(),
         ]);
 
         return $this->render('index', [
@@ -42,7 +42,7 @@ class StrahovkaController extends Controller
     }
 
     /**
-     * Displays a single Strahovka model.
+     * Displays a single Price model.
      * @param integer $id
      * @return mixed
      */
@@ -52,18 +52,20 @@ class StrahovkaController extends Controller
             'model' => $this->findModel($id),
         ]);
     }
-
+    public function actionAfterorder1(){
+        return $this->render('afterorder1');
+    }
     /**
-     * Creates a new Strahovka model.
+     * Creates a new Price model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Strahovka();
+        $model = new Price();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['order', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -72,47 +74,35 @@ class StrahovkaController extends Controller
     }
 
     /**
-     * Updates an existing Strahovka model.
+     * Updates an existing Price model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
      */
-    public function actionUpdate($id)
+    public function actionOrder($id)
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post()) && $model->sendEmail() && $model->save()) {
+           return $this->redirect('afterorder1');
         } else {
-            return $this->render('update', [
+            return $this->render('order', [
                 'model' => $model,
             ]);
         }
     }
 
-    /**
-     * Deletes an existing Strahovka model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionDelete($id)
-    {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
-    }
 
     /**
-     * Finds the Strahovka model based on its primary key value.
+     * Finds the Price model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Strahovka the loaded model
+     * @return Price the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Strahovka::findOne($id)) !== null) {
+        if (($model = Price::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

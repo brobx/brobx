@@ -3,9 +3,11 @@
 $params = require(__DIR__ . '/params.php');
 
 $config = [
+    'name' => 'АвтоСтраховка',
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'language' => 'ru',
     'components' => [
         'urlManager' => [
             'class' => 'yii\web\UrlManager',
@@ -14,7 +16,10 @@ $config = [
             // Disable r= routes
             'enablePrettyUrl' => true,
                     ],
-
+        'authManager' => [
+            'class' => 'yii\rbac\PhpManager',
+            'defaultRoles' => ['admin', 'BRAND']
+],
         'request' => [
 
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation

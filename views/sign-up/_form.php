@@ -9,13 +9,13 @@ use kartik\date\DatePicker;;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="sign-up-form">
-
+<div class="login">
+    <h1><?= Html::encode($this->title) ?></h1>
     <?php $form = ActiveForm::begin([
         'id' => 'sign-up-form',
         'options' => ['class' => 'form-horizontal'],
         'fieldConfig' => [
-            'template' => "{label}\n<div class=\"col-lg-3\">{input}</div>\n<div class=\"col-lg-8\">{error}</div>",
+            'template' => "{label}\n<div class=\"input\">{input}</div>\n<div class=\"input\">{error}</div>",
             'labelOptions' => ['class' => 'col-lg-1 control-label'],
         ]]); ?>
 
@@ -40,7 +40,7 @@ use kartik\date\DatePicker;;
     ]);      ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Sign up' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

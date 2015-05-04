@@ -4,20 +4,15 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Strahovka */
+/* @var $model app\models\Price */
 /* @var $form yii\widgets\ActiveForm */
-$this->registerJsFile(Yii::getAlias('@web/calc.js'), ['depends' => [
-    'yii\web\YiiAsset',
-    'yii\bootstrap\BootstrapAsset'],
-]);
 ?>
 
-<div class="col-lg-5">
+<div class="price-form">
 
-    <?php $form = ActiveForm::begin([
-        'id' => 'contact-form']); ?>
+    <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'oblast')->dropDownList([
+    <?= $form->field($model, 'registrationPlace')->dropDownList([
         '4.2' => 'Киев',
         '2.2'=> 'Киевская область',
         '3'=>'Харьков, Одесса',
@@ -26,27 +21,23 @@ $this->registerJsFile(Yii::getAlias('@web/calc.js'), ['depends' => [
         '1.3'=> 'Города с населением менее 100тыс. человек'
     ]) ?>
 
-    <?= $form->field($model,'dvigatel')->dropDownList([
+    <?= $form->field($model, 'engine')->dropDownList([
         '1'=> 'до 1.6',
         '1.14'=> '1.6-2.0',
         '1.18'=> '2.0-3.0',
         '1.82'=> '3.0 и больше'
     ]) ?>
 
-    <?= $form->field($model, 'fran')->dropDownList([
+    <?= $form->field($model, 'franchise')->dropDownList([
         '1'=> '0 грн',
         '0.85'=> '500 грн',
         '0.8'=> '1000 грн'
     ]) ?>
 
-    <?= $form->field($model, 'name')->textInput(['maxlength' => 255]) ?>
 
-    <?= $form->field($model, 'phone')->textInput(['maxlength' => 255]) ?>
-
-    <?= $form->field($model, 'email')->textInput(['maxlength' => 255]) ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Посчитать' : 'Заказать', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
