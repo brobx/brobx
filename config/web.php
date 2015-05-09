@@ -22,6 +22,7 @@ $config = [
 ],
         'request' => [
 
+
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => '1234',
         ],
@@ -37,13 +38,13 @@ $config = [
         ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
-            /*'transport' => [
+            'transport' => [
                 'class' => 'Swift_SmtpTransport',
-                'host' => 'localhost',
-                'username' => 'username',
-                'password' => 'password',
-                'port' => '587',
-                'encryption' => 'tls',],*/
+                'host' => 'smtp-pulse.com',
+                'username' => 'pirogpbass@gmail.com',
+                'password' => 'NgkoXaZYSaRKpE',
+                'port' => '2525',
+                'encryption' => 'tls',],
             // send all mails to a file by default. You have to set
             // 'useFileTransport' to false and configure a transport
             // for the mailer to send real emails.

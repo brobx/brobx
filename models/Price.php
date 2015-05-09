@@ -5,15 +5,7 @@ namespace app\models;
 use Yii;
 use yii\base\InvalidParamException;
 use yii\base\Model;
-/**
- * This is the model class for table "price".
- *
- * @property integer $id
- * @property string $registrationPlace
- * @property string $engine
- * @property string $franchise
- * @property string $price
- */
+
 class Price extends \yii\db\ActiveRecord
 {
     /**
@@ -30,7 +22,7 @@ class Price extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['registrationPlace', 'engine', 'franchise',], 'required'],
+            [['registrationPlace', 'engine', 'franchise'], 'required'],
             [['registrationPlace', 'engine', 'franchise', 'price', 'name', 'surname', 'email', 'phone'], 'string', 'max' => 255],
             ['email', 'email']
         ];
@@ -70,8 +62,9 @@ class Price extends \yii\db\ActiveRecord
 
     public function sendEmail()
     {
+        $order = Price::findOne($this->id);
         if ($this->save()) {
-            return \Yii::$app->mailer->compose(['html' => 'order-html', 'text' => 'order-text'])
+            return \Yii::$app->mailer->compose(['html' => 'order-html', 'text' => 'order-text'], ['order'=>$order])
                 ->setFrom([\Yii::$app->params['adminEmail'] => \Yii::$app->name . ' robot'])
                 ->setTo([\Yii::$app->params['managerEmail']])
                 ->setSubject('order')

@@ -1,6 +1,8 @@
+<?php
 
- * Created by PhpStorm.
- * User: pavel
- * Date: 30.04.15
- * Time: 16:59
- */
+use yii\helpers\Html;
+/* @var $this yii\web\View */
+/* @var $order app\models\Price */
+$resetLink = Yii::$app->urlManager->createAbsoluteUrl(['price/view', 'id' => $order->id]);
+?>
+ <?= $resetLink ?>

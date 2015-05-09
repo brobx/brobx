@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Price;
+use app\models\Order;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -52,6 +53,7 @@ class PriceController extends Controller
             'model' => $this->findModel($id),
         ]);
     }
+
     public function actionAfterorder1(){
         return $this->render('afterorder1');
     }
@@ -83,8 +85,9 @@ class PriceController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->sendEmail() && $model->save()) {
-           return $this->redirect('afterorder1');
+        if ($model->load(Yii::$app->request->post()) && $model->sendEmail()) {
+
+            return $this->redirect(['afterorder1']);
         } else {
             return $this->render('order', [
                 'model' => $model,
